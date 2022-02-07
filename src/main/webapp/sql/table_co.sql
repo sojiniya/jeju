@@ -36,7 +36,7 @@ create table jboard_co_comment(
     constraint jboard_co_comment_fk2 foreign key(user_num) references juser(user_num)
 );
 
-create sequence jboard_co_comment_seq;
+create sequence jcomment_co_seq;
 
 /*추천 코스 코멘트 좋아요*/
 create table jboard_co_comment_like(

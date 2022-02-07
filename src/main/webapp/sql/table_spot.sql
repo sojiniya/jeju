@@ -37,7 +37,7 @@ create table jboard_spot_comment(
   constraint jboard_spot_comment_fk foreign key (user_num) references juser (user_num)
 );
 
-create sequence jboard_spot_comment_seq;
+create sequence jcomment_spot_seq;
 
 /*추천 장소 코멘트 좋아요*/
 create table jboard_spot_comment_like(

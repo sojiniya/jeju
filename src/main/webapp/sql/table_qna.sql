@@ -28,4 +28,4 @@ create table jboard_qna_comment(
     constraint jboard_qna_comment_fk2 foreign key(user_num) references juser(user_num)
 );
 
-create sequence jboard_qna_comment_seq;
+create sequence jomment_qna_seq;

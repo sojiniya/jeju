@@ -15,10 +15,10 @@ create table jboard_co(
 create sequence jboard_co_seq;
 
 /*추천 코스 좋아요*/
-create table jboard_co_like(
+create table jboard_co_good(
     board_co_num number(10) not null,
     user_num number(10) not null,
-    like1 number(1) not null,
+    good number(1) not null,
     constraint jboard_co_like_fk foreign key(board_co_num) references jboard_co(board_co_num),
     constraint jboard_co_like_fk2 foreign key(user_num) references juser(user_num)
 );
@@ -39,10 +39,10 @@ create table jboard_co_comment(
 create sequence jcomment_co_seq;
 
 /*추천 코스 코멘트 좋아요*/
-create table jboard_co_comment_like(
+create table jboard_co_comment_good(
     co_comment_num number(10) not null,
     user_num number(10) not null,
-    like1 number(1) not null,
+    good number(1) not null,
     constraint jboard_co_comment_like_fk foreign key(co_comment_num) references jboard_co_comment(co_comment_num),
     constraint jboard_co_comment_like_fk2 foreign key(user_num) references juser(user_num)
 );

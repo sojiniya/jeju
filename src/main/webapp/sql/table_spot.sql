@@ -17,10 +17,10 @@ create table jboard_spot(
 create sequence jboard_spot_seq;
 
 /*추천 장소 좋아요*/
-create table jboard_spot_like(
+create table jboard_spot_good(
     board_spot_num number(10) not null,
     user_num number(10) not null,
-    like1 number(1) not null,
+    good number(1) not null,
     constraint jboard_spot_like_fk foreign key(board_spot_num) references jboard_spot(board_spot_num),
     constraint jboard_spot_like_fk2 foreign key(user_num) references juser(user_num)
 );
@@ -40,10 +40,10 @@ create table jboard_spot_comment(
 create sequence jcomment_spot_seq;
 
 /*추천 장소 코멘트 좋아요*/
-create table jboard_spot_comment_like(
+create table jboard_spot_comment_good(
     spot_comment_num number(10) not null,
     user_num number(10) not null,
-    like1 number(1) not null,
+    good number(1) not null,
     constraint jboard_spot_comment_like_fk foreign key(spot_comment_num) references jboard_spot_comment(spot_comment_num),
     constraint jboard_spot_comment_like_fk2 foreign key(user_num) references juser(user_num)
 );

@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/theme.css">
-
+/*test*/
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp" />

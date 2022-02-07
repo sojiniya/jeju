@@ -351,11 +351,78 @@ public class UserDAO {
 	//===============================================================================================================================================================//
 	/*								 [관리자] 							*/
 	// 총 회원 수
-
+	public int getUserByAdmin(String keyfield,String keyword) throws Exception{
+		Connection conn =null;
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		String sql=null;
+		String sub_sql ="";
+		int count =0;
+		try {
+			conn = DBUtil.getConnection();
+			
+			sql ="SELECT count(*) FROM zmember LEFT JOIN zmember_detail USING(member_num)";
+			
+			pstmt = conn.prepareStatement(sql);
+			
+			rs =pstmt.executeQuery();
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return count;
+	}
 
 
 	// 회원 목록 조회
+	public List<UserVO> getListUserByAdmin(String keyfield,String keyword,int endRow,int startRow) throws Exception{
+		Connection conn =null;
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		String sql =null;
+		String sub_sql="";
+		List<UserVO> list =null;
+		try {
+			conn =DBUtil.getConnection();
+			
+			sql ="SELECT * FROM (SELECT a.*,rownum rnum FROM (SELECT * FROM zmember m LEFT OUTER JOIN zmember_detail d USING(mem_num) ORDER BY reg_date DESC NULLS LAST)a) WHERE rnum>=? AND rnum<=?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 
+			rs= pstmt.executeQuery();
+			list = new ArrayList<UserVO>();
+			while(rs.next()) {
+				UserVO user= new UserVO();
+				user.setUser_num(rs.getInt("user_num"));
+				user.setId(rs.getString("id"));
+				user.setAuth(rs.getInt("auth"));
+				user.setName(rs.getString("name"));
+				user.setPhone(rs.getString("phone"));
+				user.setEmail(rs.getString("email"));
+				user.setZipcode(rs.getString("zipcode"));
+				user.setAddress1(rs.getString("address1"));
+				user.setAddress2(rs.getString("address2"));
+				user.setPhoto(rs.getString("photo"));
+				user.setReg_date(rs.getDate("reg_date"));
+				user.setModify_date(rs.getDate("modify_date"));
+				
+				list.add(user);
+			}
+			
+		}catch(Exception e) {
+			throw new Exception(e);
+		}finally {
+			DBUtil.executeClose(rs, pstmt, conn);
+		}
+		return list;
+	}
 
 
 	// 회원 정보 수정

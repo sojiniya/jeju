@@ -1,14 +1,14 @@
 create table juser(
-    user_num number(10) not null,
-    id varchar2(12) not null,
-    auth number(10) not null,
+    user_num number not null,
+    id varchar2(12) unique not null,
+    auth number(1) default 2 not null,
     constraint juser_pk primary key(user_num)
 );
 
 create sequence juser_seq;
 
 create table juser_detail(
-    user_num number(10) not null,
+    user_num number not null,
     name varchar2(30) not null,
     passwd varchar2(12) not null,
     phone varchar2(15) not null,
